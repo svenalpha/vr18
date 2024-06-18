@@ -3,9 +3,12 @@
 
 import useHelmet from '@hooks/useHelmet';
 import React, { useEffect , useState} from 'react'; 
+import axios from "axios";
 //import  { WorkoutForm } from "../../components/WorkoutForm";
 import  { WorkoutDetails } from "../../components/WorkoutDetails";
-import axios from "axios";
+import  { WorkoutForm } from "../../components/WorkoutForm";
+
+
 
 const Extra: React.FC<ExtraProps> = (props) => 
 {//const [datax,setDatax] = useState(); 
@@ -17,6 +20,8 @@ const Extra: React.FC<ExtraProps> = (props) =>
 
  const helmet = useHelmet();
  const [workouts,setWorkouts]=useState(null);
+ 
+const [str1,setStr1] = useState("abcdefghijklmnop"); 
 
  
  // async function fetchWorkouts()  
@@ -40,7 +45,22 @@ const Extra: React.FC<ExtraProps> = (props) =>
   }    //  end  const fetchWorkouts = async () => 
 useEffect(() =>{fetchWorkouts();},[])
 
- 
+
+// async function  handleTestClick  (e:any)  
+// { console.log("inside handleTestClick");
+  //const workout = {title,load,reps};  
+  //await axios.post('/rrr/postMongo',workout)
+  //.then((response) => 
+  //  {if (response.status != 200)
+  //    {  console.log("post failed with response.status != 200 ");
+  //    }  else 
+  //    { console.log("post succeeded with response.status == 200. response.status = ",response.status);
+  //      console.log("post succeeded with response.status == 200. response.data = ",response.data);
+  //      console.log("post succeeded with response.status == 200. response = ",response);
+  //    }  //  end  if (response.status != 200)   
+  //  }                    
+  //     );   /// end   .then
+//}
     
 useEffect(() => 
   {helmet.setTitle("Extra")
@@ -48,7 +68,9 @@ useEffect(() =>
 
 return (<>
   <h1>Extra</h1>
-  
+     
+
+
   <div className= "home">
     <div className= "workouts">                         
               { workouts && Object.values(workouts).map((workout:any) => (  
@@ -69,7 +91,7 @@ return (<>
 
     </div>
   </div>
-
+  <WorkoutForm />  
             
            <p>qwwwertyuiogggggghhjhhjjkkll</p>   
 

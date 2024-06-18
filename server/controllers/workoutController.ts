@@ -17,7 +17,8 @@ export const getEnv =  (req:any,res:any)=>{
 
 // export const getAllWorkoutEntries = async  (req,res)=>{  
     export const getAllWorkoutEntries = async  (req:any, res:any)=>{     
-    console.log("inside workoutController.js getAllWorkoutEntries ");            
+    console.log("inside workoutController.js getAllWorkoutEntries ");  
+    console.log("inside workoutController.js getAllWorkoutEntries  req.body = ",req.body);           
     const workouts = await WorkoutModelDb.find({}).sort({createdAt: -1});  // ie find all, sorted in descending order       
                                     // ....find({reps:20}).... finds all entries where reps=20
     return res.status(200).json(workouts);            }                  
@@ -33,9 +34,21 @@ export const getEnv =  (req:any,res:any)=>{
 //  GET single entry
 
 // Create (ie POST) new entry
-export const createWorkoutEntry = async (req:any,res:any)=>{
-    console.log("inside controllers/workoutController.js    createWorkoutEntry");
-    const {title, reps, load} = req.body;     
+export const createWorkoutEntry = async (req:any,res:any)=>
+  { console.log("inside controllers/workoutController.js    createWorkoutEntry");
+   //console.log("inside controllers/workoutController.js  createWorkoutEntry req.body = ",req.body);
+    //console.log("inside controllers/workoutController.js  createWorkoutEntry req = ",req);
+   
+    //console.log("req.body  = ",req.body);
+    //console.log("req.params = ",req.params);
+    //console.log("req.path = ",req.path);
+    //console.log("req.headers.origin = ",req.headers.origin);
+    //console.log("req  = ",req);
+
+    
+    const {title, reps, load} = req.body;   
+    // console.log("in createWorkoutEntry   title , reps, load = ",title, reps , load);
+    
 
     let emptyFields = []; 
     if (!title) {emptyFields.push("title");}
@@ -50,8 +63,10 @@ export const createWorkoutEntry = async (req:any,res:any)=>{
        {return res.status(400).json({error: error.message});
        } 
     //res.json({mssg: "POST new entry"});
-                                                   }                                           
+  }     //   end   export const createWorkoutEntry = async (req:any,res:any)=>                                      
 
+
+  
 // DELETE entry
 
 // UPDATE entry
@@ -68,9 +83,9 @@ export const createWorkoutEntry = async (req:any,res:any)=>{
 //zz                                                   }   // end   export const updateWorkoutEntry      
 //zz                                
                                
-export default { getAllWorkoutEntries , getSecondExport }; 
+export default { getAllWorkoutEntries , getSecondExport, createWorkoutEntry }; 
 //export default getEnv;                                           
 //module.exports = getAllWorkoutEntries;                                                      
                                              
-                                            
+//                                       
                                       

@@ -22,9 +22,19 @@ const indexProd: string = isProd
 
 
 
+
+
+
+
 const createServer = async () => {
 
     const app = express();  
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+
+
 
     app.get("/rrr/v9",(req,res) => {
         res.send("using /rrr  : hello world !!!!");

@@ -4,7 +4,7 @@ import   users    from "./db/Users.js";
 //import {getEnv,getAllWorkoutEntries,
 //    //updateWorkoutEntry,
 //    createWorkoutEntry} from "./controllers/workoutController.js";
-import  { getAllWorkoutEntries, getSecondExport }  from "./controllers/workoutController.js";
+import  { getAllWorkoutEntries, getSecondExport, createWorkoutEntry }  from "./controllers/workoutController.js";
 
 
 //import   people   from  "@db/people";
@@ -26,6 +26,8 @@ class App {
 
         this.router.get("/doGetSecondExport",  getSecondExport);  //see export const getAllWorkoutEntries in workoutController.js
 
+
+        // GET all entries   
         this.router.get("/getMongo",  getAllWorkoutEntries);  //see export const getAllWorkoutEntries in workoutController.js
         //this.router.get('/getMongo', async (req, res) => {
         ////  res.send("/rrr/getMongo     in server/app.ts")
@@ -35,8 +37,19 @@ class App {
         //                                                 }                
         //               )             
 
+        // POST new entry   
+        this.router.post("/postMongo", createWorkoutEntry); //  see export const createWorkoutEntry in workoutController.js  
 
 
+      //  this.router.post('/postMongo"', (req, res) => {
+      //      //res.send("/rrr/proxy2 in server/app.ts")                      // req.path req.headers.origin
+      //      //console.log("titlex  = titlex");      //const url = req.originalUrl   console.log("req.params = ",req.params);  
+      //      console.log("inside Extra/app.ts   req.body =", req.body);    //
+      //      console.log("inside Extra/app.ts   req.params =", req.params);
+      //      //console.log("inside Extra/app.ts   req.params.id =", req.params;
+      //     // const {title, reps, load} = req.body; 
+      //                                               }
+      //                  )                             
 
         this.router.get('/proxy2', (req, res) => {
             res.send("/rrr/proxy2 in server/app.ts")
