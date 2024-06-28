@@ -1,13 +1,14 @@
 import useHelmet from '@hooks/useHelmet';
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
-
+import   { useWorkoutsContext }    from "../../hooks/useWorkoutsContext";
 
 const Contact: React.FC<ContactProps> = (props) => {
     const [legend, setLegend] = useState("  here is useState original legend");
     const [legend2, setLegend2] = useState("  here is useState original legend pre fetch ");
     const [data, setData] = useState();
     const [datax, setDatax] = useState([]);
+    const {workouts, dispatch} = useWorkoutsContext(); 
     const url ="";
     const helmet = useHelmet()
 
@@ -29,6 +30,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                                         
 
                     }, [])     // end useEffect
+                    
 //function async getDataFromMongo() 
 const getDataFromMongo = async () => 
 {  //axios.get(url)
@@ -41,8 +43,12 @@ const getDataFromMongo = async () =>
 
    await axios.get('/rrr/getMongo').then((response) => {    // "/api"     
     //console.log(" useEffect, response data = ",response.data)    
-    setDatax(response.data);
-    console.log("response to getMongo datax = ",datax);
+    if (response.status === 200)   // ie successful   
+      {//setDatax(response.data);  
+        dispatch({type: "SET_WORKOUTS", payload: response.data});
+        //setDatax(response.data);
+       console.log("response to getMongo datax = ",datax);
+      }
                                                        }
                   )  
 
@@ -71,26 +77,26 @@ const getDataFromMongo = async () =>
             <p>{legend2}</p>
             <div>
             {
-             Object.values(datax).map(dat => (
+             workouts && Object.values(workouts).map((dat:any) => (
                                     <div key={dat["id"]}> 
                                        <h6>{dat['title']}    {dat['reps']}   {dat['load']}</h6>
                                      </div>                      
                                              )                                    
                                      )                                                                
 
-              }
+            }
          </div> 
 
 
 
 
 
-
-            <button onClick={getDataFromMongo}>Access server using proxy</button>
+         
+            <button onClick={() =>(getDataFromMongo())}>Access server using proxy</button>
         </>
     )
 }
-
+//onClick={()=>(setDoUpdate(true))}>
 interface ContactProps {
     [key: string]: any
 }

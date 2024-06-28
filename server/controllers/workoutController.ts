@@ -3,7 +3,9 @@
 // import express, { Router } from 'express';
 //import  Express from "express";
 // import express, { Router } from 'express'; 
+import mongoose from 'mongoose';
 import WorkoutModelDb from "../models/workoutDbModel.js";
+//import {useParams} from "react-router-dom";
 
 
 export const getEnv =  (req:any,res:any)=>{  
@@ -30,6 +32,9 @@ export const getEnv =  (req:any,res:any)=>{
                                                         }  
 
 
+ 
+
+                                                        
 
 //  GET single entry
 
@@ -55,12 +60,18 @@ export const createWorkoutEntry = async (req:any,res:any)=>
     if (!load) {emptyFields.push("load");}
     if (!reps) {emptyFields.push("reps");}    
     if (emptyFields.length > 0) 
-       {return res.status(400).json({error: "please complete all fields",emptyFields})
+       {console.log("in createWorkoutEntry emptyFields.length >0 ");
+        //return res.status(400).send({erorNo: emptyFields, error: "please complete all fields"})
+        //return res.status(400).send({ error: "please complete all fields",emptyFields,extra: "asdfghjkl"})
+        return res.status(400).send({ error: "please complete all fields",emptyFields,extra: "asdfghjkl"})
+        //return  res.status(400).json({"asdccvvbbnnnm"},{"zzzzzzzzzzzzzzzzzzzzzzz"});
        }    
     try{const wo = await WorkoutModelDb.create({title,reps,load});
+         console.log("returning res.status(200).json(wo);");
         return res.status(200).json(wo);
        }catch (error:any)
-       {return res.status(400).json({error: error.message});
+       { console.log("return res.status(400).json({error: error.message}; error.message =", error.message);
+        return res.status(400).json({error: error.message});
        } 
     //res.json({mssg: "POST new entry"});
   }     //   end   export const createWorkoutEntry = async (req:any,res:any)=>                                      
@@ -81,9 +92,36 @@ export const createWorkoutEntry = async (req:any,res:any)=>
 //zz  if (!workout) {return res.status(400).json({error: "no such entry"});}           
 //zz    return res.status(200).json(workout);      
 //zz                                                   }   // end   export const updateWorkoutEntry      
-//zz                                
+//zz      
+
+
+//router.delete("/:id",async (req,res)=>{
+//export const createWorkoutEntry = async (req:any,res:any)=>
+
+export const deleteWorkoutEntryx = async  (req:any,res:any)=>{ }
+//const { id }   = useParams();
+
+export const deleteWorkoutEntry = async (req:any,res:any)=>
+                                    {
+ console.log("in workoutRoutes.js  router.delete('/:id'...");
+  const {id} = req.params;
+  console.log("in deleteWorkoutEntry  req.params = ",req.params); 
+  console.log("in deleteWorkoutEntry  id = ",id);                   
+  if (!mongoose.Types.ObjectId.isValid(id)) // ie entered id is of mongoose id length and type to even consider as an id
+      return res.status(404).json({error: "not a valid id"});
+                                                                                    
+  const workout = await WorkoutModelDb.findOneAndDelete({_id : id});   
+  if (!workout) {return res.status(400).json({error: "no such entry"});}
+  return res.status(200).json(workout);                                      
+                                    }      
+
+  //         );   // end  router.delete("/:id",async (req,res)=>{                         
+
+
+
+
                                
-export default { getAllWorkoutEntries , getSecondExport, createWorkoutEntry }; 
+export default { getAllWorkoutEntries , getSecondExport, createWorkoutEntry , deleteWorkoutEntry}; 
 //export default getEnv;                                           
 //module.exports = getAllWorkoutEntries;                                                      
                                              
