@@ -14,7 +14,7 @@ export const WorkoutForm = ({...workout})=>
    const [error2,setError2] = useState(null);
    const [emptyFields,setEmptyFields] = useState([] as any);
 
-   const handleSubmit = async (e:any)=>                     
+   const handleSubmitCreate = async (e:any)=>                     
     {e.preventDefault();    
      
      const workout = {title,load,reps};  
@@ -81,7 +81,7 @@ export const WorkoutForm = ({...workout})=>
     return(<>
 
                                            
-      <form className="create" onSubmit={handleSubmit}>      
+      <form className="create" onSubmit={handleSubmitCreate}>      
       <h3>add a new entry</h3> 
     
 
@@ -114,7 +114,7 @@ className={emptyFields.includes("load") ? "error" : " "}
       />  
 
 
-      <button type='submit' className='btn' onClick={handleSubmit}>submit form</button>
+      <button type='submit' className='btn' onClick={handleSubmitCreate}>submit form</button>
       {error2 && <div className="error">{error2}</div> }  
     </form>   
     

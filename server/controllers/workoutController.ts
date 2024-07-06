@@ -32,9 +32,66 @@ export const getEnv =  (req:any,res:any)=>{
                                                         }  
 
 
- 
+  //  update  (ie PATCH) an entry 
+export const updateWorkoutEntry = async  (req:any,res:any)=>{
+  console.log("inside controllers/workoutController.js    updateWorkoutEntry");
+  console.log("in controllers  update('/:id'...");
+  console.log("in controllers  update req.body = ",req.body);
+  const {id} = req.params;
+  console.log("in controllers  update  req.params = ",req.params); 
+  console.log("in controllers update id = ",id);   
+  if (!mongoose.Types.ObjectId.isValid(id)) // ie entered id is of mongoose id length and type to even consider as an id
+       return res.status(404).json({error: "not a valid id"});  
+  const workout = await WorkoutModelDb.findOneAndUpdate({_id : id} ,{...req.body}, {returnDocument: "after" });     
+  console.log("workout returned following findOneAndUpdate= ",workout);                                                             
+  if (!workout) {return res.status(400).json({error: "no such entry"});}           
+     return res.status(200).json(workout);  
 
-                                                        
+//export const updateWorkoutEntry = async (req,res)=>{   ,{ returnNewDocument: true}
+//  console.log("ssssshhhhhkjkkk");      
+//  const {id} = req.params;   
+//  console.log("req.params = ",req.params);                                   
+//zz  if (!mongoose.Types.ObjectId.isValid(id)) // ie entered id is of mongoose id length and type to even consider as an id
+//zz    return res.status(404).json({error: "not a valid id"});                 
+//zz                                                                            
+//zz  const workout = await WorkoutModelDb.findOneAndUpdate({_id : id},{...req.body});         
+//zz  if (!workout) {return res.status(400).json({error: "no such entry"});}           
+//zz    return res.status(200).json(workout);      
+//zz                                                   }   // end   export const updateWorkoutEntry      
+//zz  
+ }     //   end    export const updateWorkoutEntry = async  (req:any,res:any)=>                                           
+
+
+
+//router.delete("/:id",async (req,res)=>{
+//export const createWorkoutEntry = async (req:any,res:any)=>
+
+
+export const deleteWorkoutEntry = async (req:any,res:any)=>
+  {
+console.log("in workoutRoutes.js  router.delete('/:id'...");
+const {id} = req.params;
+console.log("in deleteWorkoutEntry  req.params = ",req.params); 
+console.log("in deleteWorkoutEntry  id = ",id);                   
+if (!mongoose.Types.ObjectId.isValid(id)) // ie entered id is of mongoose id length and type to even consider as an id
+return res.status(404).json({error: "not a valid id"});
+                                                  
+const workout = await WorkoutModelDb.findOneAndDelete({_id : id});   
+if (!workout) {return res.status(400).json({error: "no such entry"});}
+return res.status(200).json(workout);                                      
+  }      
+
+//         );   // end  router.delete("/:id",async (req,res)=>{                         
+
+
+
+
+
+
+
+
+
+
 
 //  GET single entry
 
@@ -78,8 +135,6 @@ export const createWorkoutEntry = async (req:any,res:any)=>
 
 
   
-// DELETE entry
-
 // UPDATE entry
 //export const updateWorkoutEntry = async (req,res)=>{
 //  console.log("ssssshhhhhkjkkk");      
@@ -95,33 +150,8 @@ export const createWorkoutEntry = async (req:any,res:any)=>
 //zz      
 
 
-//router.delete("/:id",async (req,res)=>{
-//export const createWorkoutEntry = async (req:any,res:any)=>
-
-export const deleteWorkoutEntryx = async  (req:any,res:any)=>{ }
-//const { id }   = useParams();
-
-export const deleteWorkoutEntry = async (req:any,res:any)=>
-                                    {
- console.log("in workoutRoutes.js  router.delete('/:id'...");
-  const {id} = req.params;
-  console.log("in deleteWorkoutEntry  req.params = ",req.params); 
-  console.log("in deleteWorkoutEntry  id = ",id);                   
-  if (!mongoose.Types.ObjectId.isValid(id)) // ie entered id is of mongoose id length and type to even consider as an id
-      return res.status(404).json({error: "not a valid id"});
-                                                                                    
-  const workout = await WorkoutModelDb.findOneAndDelete({_id : id});   
-  if (!workout) {return res.status(400).json({error: "no such entry"});}
-  return res.status(200).json(workout);                                      
-                                    }      
-
-  //         );   // end  router.delete("/:id",async (req,res)=>{                         
-
-
-
-
                                
-export default { getAllWorkoutEntries , getSecondExport, createWorkoutEntry , deleteWorkoutEntry}; 
+export default { getAllWorkoutEntries , getSecondExport, createWorkoutEntry , deleteWorkoutEntry, updateWorkoutEntry}; 
 //export default getEnv;                                           
 //module.exports = getAllWorkoutEntries;                                                      
                                              

@@ -14,8 +14,15 @@
     "build:server": "tsc -p tsconfig.server.json && vite build --ssr src/entry-server.tsx --outDir dist/entry",
     "buildOriginal:server": "tsc -p tsconfig.server.json && vite build --ssr src/entry-server.tsx --outDir dist/entry",
     "clean": "rimraf dist",
-    "serve": "cross-env  NODE_ENV=production node ./dist/app/server"
+    "serve": "cross-env  NODE_ENV=production node ./dist/app/server",
+    "comment": " _react_:  18 2 0" ,
+    "comment_preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions"
+
   },
+
+
+
+
   "dependencies": {
     "@loadable/component": "^5.16.3",
     "axios": "^1.7.2",

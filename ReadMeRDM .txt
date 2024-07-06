@@ -12,8 +12,12 @@ stack: "Y@https://vr13.onrender.com/assets/index-6mBp7LUM.js:75:13400\nXw@https:
 vr13 is built out vite-express-ssr-ts-main using react, succesful fetch from backend, fetching entries 
 from mongo but not C-UD of crud. Successfully uploaded to render.
 vr13 is to be left as is.
-vr18 to be vr13 built out to include crud, including (react) useContext to update local totals 
-to be in synch with remote mongo db.
+vr18 to be vr13 built out to include crud, including ts (react) useContext to update local totals 
+to be in synch with remote mongo db. In vr18 the crud elements are taken from TNN_MERN Stack tutorial 
+(video files in c:\web\00Videos_web). The crud techniques (including useContext) do not use 
+typescript. Adapting them took time and contain non-intuitive solutions. vr18 is thus 
+ssr-react/vite/crud/typecript model.
+
 
 
 

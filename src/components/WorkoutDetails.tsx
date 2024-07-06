@@ -1,11 +1,12 @@
 import {useState} from "react";
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";   
+import { UpdateWorkoutForm } from "./UpdateWorkoutForm";
 import axios from "axios";
 
 
 export const WorkoutDetails = ({...workout})=>
   {const [title,setTitle] = useState("title in WorkoutDetails");
-
+   const [doUpdate,setDoUpdate] = useState(false); 
    const {dispatch} = useWorkoutsContext();
 
 
@@ -41,17 +42,6 @@ export const WorkoutDetails = ({...workout})=>
   //     {
   //     }           
   //         ); //  end catch
-
-
-
-
-
-
-
-
-
-
-
     return(<>
            <div className= "workout-details">
              <p>zzzzzzz {title}  xxxxxxxx</p>   
@@ -60,6 +50,11 @@ export const WorkoutDetails = ({...workout})=>
              <p><strong>Reps: </strong>  {workout["reps"]}</p>  
              <p>{workout["createdAt"]}</p>
              <button onClick={handleClickDelete}>delete</button>
+             <button onClick={()=>(setDoUpdate(true))}>setDoUpdate</button>
+            {/* {doUpdate && <UpdateWorkoutForm key={workout._id} workout ={workout}  doUpdate={doUpdate} setDoUpdate={setDoUpdate} />}  */}    {/* ie if setDoUpdate clicked, doUpdate =1, so <UpdateWorkoutForm /> fires   */}
+             {doUpdate && <UpdateWorkoutForm key={workout._id}  doUpdate  setDoUpdate={setDoUpdate} {...workout} />}                                                                                                                                                                                                                                
+   <h4>inside end WorkoutDisplayDetails.js</h4>
+
 
            </div>    
        </>)   // end return

@@ -4,7 +4,8 @@ import   users    from "./db/Users.js";
 //import {getEnv,getAllWorkoutEntries,
 //    //updateWorkoutEntry,
 //    createWorkoutEntry} from "./controllers/workoutController.js";
-import  { getAllWorkoutEntries, getSecondExport, createWorkoutEntry, deleteWorkoutEntry }  from "./controllers/workoutController.js";
+import  { getAllWorkoutEntries, getSecondExport, createWorkoutEntry, deleteWorkoutEntry, 
+          updateWorkoutEntry }  from "./controllers/workoutController.js";
 
 
 //import   people   from  "@db/people";
@@ -40,8 +41,12 @@ class App {
         // POST new entry   
         this.router.post("/postMongo", createWorkoutEntry); //  see export const createWorkoutEntry in workoutController.js  
 
-         // POST new entry   
+         // DELETE new entry   
         this.router.delete("/deleteMongo/:id", deleteWorkoutEntry); //  see export const createWorkoutEntry in workoutController.js  
+        // DELETE new entry   
+        this.router.patch("/updateMongo/:id", updateWorkoutEntry); //  see export const createWorkoutEntry in workoutController.js  
+
+
 
       //  this.router.post('/postMongo"', (req, res) => {
       //      //res.send("/rrr/proxy2 in server/app.ts")                      // req.path req.headers.origin

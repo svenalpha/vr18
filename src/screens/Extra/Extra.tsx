@@ -7,6 +7,7 @@ import axios from "axios";
 //import  { WorkoutForm } from "../../components/WorkoutForm";
 import  { WorkoutDetails } from "../../components/WorkoutDetails";
 import  { WorkoutForm } from "../../components/WorkoutForm";
+import  { UpdateWorkoutForm } from "../../components/UpdateWorkoutForm";
 import   { useWorkoutsContext }    from "../../hooks/useWorkoutsContext";
 //import   * as  useWorkoutsContext     from "../../hooks/useWorkoutsContext";
 
