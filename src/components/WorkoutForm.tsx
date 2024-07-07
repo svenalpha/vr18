@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import api from '../../server/app';
 import   { useWorkoutsContext }    from "../hooks/useWorkoutsContext";
-
+import "./WorkoutForm.css";
 
 export const WorkoutForm = ({...workout})=>
   {const {dispatch} = useWorkoutsContext();
@@ -37,7 +37,7 @@ export const WorkoutForm = ({...workout})=>
      //            }                                }                            
      //                             );  
     
-     var test1;
+     var test1,test2;
     console.log("WorkoutForm  pre axios.post, workout = ", workout);  
     await axios.post('/rrr/postMongo',workout)
      .then((response) =>     //  ie success
@@ -49,9 +49,19 @@ export const WorkoutForm = ({...workout})=>
           )     /////      .then((response) =>            
      .catch((error) => 
        {test1= error.response.data.error;
-        //console.log("8 axios error.response.data.emptyfields  = ",error.response.data.emptyfields,(1))
-        //console.log("10 axios error.response.data.emptyfields  = ",error.response.data.error.emptyFields,{emptyFields});
-        //console.log("11 axios error.response.data.emptyFields  = ",error.response.data.emptyFields,{emptyFields,Array});
+        console.log("axios create error: error.response.data.emptyfields   test1 = ",test1);
+        console.log("6 axios error.response.data.error  = ",error.response.data.error);
+        console.log("6 axios error.response.data.emptyfields  = ",error.response.data.emptyfields,(1))
+        console.log("7 axios error.response  = ",error.response);
+        console.log("8 axios error.response.data.emptyfields  = ",error.response.data.emptyfields,(2))
+        console.log("10 axios error.response.data.error.emptyFields,{emptyFields}) = ",error.response.data.error.emptyFields,{emptyFields});
+        console.log("11 axios error.response.data.emptyFields,{emptyFields,Array} = ",error.response.data.emptyFields,{emptyFields,Array});
+        console.log("12 axios error.response.data.emptyFields  = ",error.response.data.emptyFields,{emptyFields,Array});
+        console.log("13 axios error.response.data.emptyFields  = ",error.response.data.emptyFields,{emptyFields,Array});
+        test2=error.response.data.emptyFields,{emptyFields,Array};
+        setEmptyFields(test2);
+        console.log("test2 = ",test2);
+        console.log("test2[1] = ",test2[1]);
         setError2(test1);
        }           
            ); //  end catch

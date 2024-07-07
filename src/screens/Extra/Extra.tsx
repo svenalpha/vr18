@@ -62,7 +62,7 @@ const [str1,setStr1] = useState("abcdefghijklmnop");
                                                       }                
                   )  //  end   await axios.get
   }    //  end  const fetchWorkouts = async () => 
-useEffect(() =>{fetchWorkouts();},[])
+useEffect(() =>{fetchWorkouts();},[dispatch])
 
 
 // async function  handleTestClick  (e:any)  

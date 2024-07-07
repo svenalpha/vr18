@@ -2,7 +2,7 @@ import {useState} from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";   
 import { UpdateWorkoutForm } from "./UpdateWorkoutForm";
 import axios from "axios";
-
+import { formatDistanceToNow }  from "date-fns/formatDistanceToNow";
 
 export const WorkoutDetails = ({...workout})=>
   {const [title,setTitle] = useState("title in WorkoutDetails");
@@ -48,8 +48,11 @@ export const WorkoutDetails = ({...workout})=>
              <h4>{workout["title"]}</h4>   
              <p><strong>Load (kg): </strong>  {workout["load"]}</p>
              <p><strong>Reps: </strong>  {workout["reps"]}</p>  
-             <p>{workout["createdAt"]}</p>
-             <button onClick={handleClickDelete}>delete</button>
+             {/* <p>{workout["createdAt"]}</p>  */}
+             <p>{formatDistanceToNow(new Date(workout["createdAt"]),{addSuffix: true})}</p>
+
+             {/* <button onClick={handleClickDelete}>delete</button>  */}
+             <button className="material-symbols-outlined" onClick={handleClickDelete}>Delete Sweep </button>
              <button onClick={()=>(setDoUpdate(true))}>setDoUpdate</button>
             {/* {doUpdate && <UpdateWorkoutForm key={workout._id} workout ={workout}  doUpdate={doUpdate} setDoUpdate={setDoUpdate} />}  */}    {/* ie if setDoUpdate clicked, doUpdate =1, so <UpdateWorkoutForm /> fires   */}
              {doUpdate && <UpdateWorkoutForm key={workout._id}  doUpdate  setDoUpdate={setDoUpdate} {...workout} />}                                                                                                                                                                                                                                

@@ -116,7 +116,7 @@ export const createWorkoutEntry = async (req:any,res:any)=>
     if (!title) {emptyFields.push("title");}
     if (!load) {emptyFields.push("load");}
     if (!reps) {emptyFields.push("reps");}    
-    if (emptyFields.length > 0) 
+    if (emptyFields.length > 0)    // ie there is at least 1 empty field
        {console.log("in createWorkoutEntry emptyFields.length >0 ");
         //return res.status(400).send({erorNo: emptyFields, error: "please complete all fields"})
         //return res.status(400).send({ error: "please complete all fields",emptyFields,extra: "asdfghjkl"})
